@@ -119,24 +119,25 @@ export default {
 
             const [oldW, oldH] = [width, height];
 
-			let {slackW, slackH} = this;
+			//Buggie part for now
+			//let {slackW, slackH} = this;
 
-			if (min) {
-				width = Math.max(min[0], width);
-				height = Math.max(min[1], height);
-			}
-			if (max) {
-				width = Math.min(max[0], width);
-				height = Math.min(max[1], height);
-			}
+			//if (min) {
+			//	width = Math.max(min[0], width);
+			//	height = Math.max(min[1], height);
+			//}
+			//if (max) {
+			//	width = Math.min(max[0], width);
+			//	height = Math.min(max[1], height);
+			//}
 
 			// If the numbers changed, we must have introduced some slack. Record it for the next iteration.
-			slackW += (oldW - width);
-			slackH += (oldH - height);
-			if (slackW !== this.slackW || slackH !== this.slackH) {
-				this.slackW = slackW;
-				this.slackH = slackH;
-			}
+			//slackW += (oldW - width);
+			//slackH += (oldH - height);
+			//if (slackW !== this.slackW || slackH !== this.slackH) {
+			//	this.slackW = slackW;
+			//	this.slackH = slackH;
+			//}
 
             return [width, height];
         },
@@ -188,8 +189,6 @@ export default {
                     this.width = newState.width ? newState.width : this.width;
                     this.height = newState.height ? newState.height : this.height;
 
-                    this.$emit(handlerName,  e, {node, size: {width, height} });
-
                     this[handlerName](e, {node, size: {width, height}});
 
                 } else {
@@ -198,6 +197,8 @@ export default {
                     this.slackW = newState.slackW;
                     this.width = newState.width ? newState.width : this.width;
                     this.height = newState.height ? newState.height : this.height;
+					
+					this.$emit(handlerName,  e, {node, size: {width, height} });
                 }
             };
         },
