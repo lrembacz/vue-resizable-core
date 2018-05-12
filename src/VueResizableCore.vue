@@ -5,6 +5,11 @@
 		:onStart="resizeHandler('onResizeStart')"
 		:onDrag="resizeHandler('onResize')"
 		:onStop="resizeHandler('onResizeStop')"
+		:noTouchAction="noTouchAction"
+		:touchAction="touchAction"
+		:noSelection="noSelection"
+		:cancel="cancel"
+		:disabled="disabled"
 		:grid="grid"
     >
         <slot></slot>
@@ -28,6 +33,26 @@ export default {
         }
     },
     props: {
+        noSelection : {
+            type: Boolean,
+            default: true,
+        },
+        noTouchAction : {
+            type: Boolean,
+            default: true,
+        },
+        touchAction: {
+            type: String,
+            default: 'none',
+        },
+        cancel: {
+            type: String,
+            default: null
+        },
+        disabled: {
+            type: Boolean,
+            default: false
+        },
         className: {
             type: String,
             required: false,
@@ -95,7 +120,10 @@ export default {
 				return {};
 		},
         styles() {
-            return {cursor: 'se-resize'}
+            return {
+                cursor: 'se-resize',
+                'touch-action': (this.noTouchAction) ? false : this.touchAction,
+            }
         }
     },
     methods: {
