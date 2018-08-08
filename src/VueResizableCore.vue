@@ -108,6 +108,16 @@ export default {
             default: () => {}
         },
     },
+	watch: {
+	    w(val) {
+	        if (val)
+	        	this.width = this.w;
+		},
+		h(val) {
+            if (val)
+	        	this.height = this.h;
+		}
+	},
     mounted() {
         this.width = this.w;
         this.height = this.h;
@@ -146,26 +156,6 @@ export default {
             if (!min && !max) return [width, height];
 
             const [oldW, oldH] = [width, height];
-
-			//Buggie part for now
-			//let {slackW, slackH} = this;
-
-			//if (min) {
-			//	width = Math.max(min[0], width);
-			//	height = Math.max(min[1], height);
-			//}
-			//if (max) {
-			//	width = Math.min(max[0], width);
-			//	height = Math.min(max[1], height);
-			//}
-
-			// If the numbers changed, we must have introduced some slack. Record it for the next iteration.
-			//slackW += (oldW - width);
-			//slackH += (oldH - height);
-			//if (slackW !== this.slackW || slackH !== this.slackH) {
-			//	this.slackW = slackW;
-			//	this.slackH = slackH;
-			//}
 
             return [width, height];
         },
